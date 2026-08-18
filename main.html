@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <script src="https://cdn.plot.ly/plotly-3.0.0.min.js"></script> <!-- Inclui a biblioteca gráfica para plot de gráficos-->
+    <script id="MathJax-script"             
+            async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+            window.MathJax=
+              { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } }; <!-- Substitui \( \) para $ $ em ambientes math -->
+    </script>
+  </head>
+
+  <body style="width: 600px; margin: auto;"> <!-- 600px é o ideal para exportar o pdf-->
+    <p style="text-align: center;
+              font-weight: bold;
+              border-bottom: 1px solid black;">
+    Lançamentos Oblíquuo
+    </p>
+
+    <p style="text-indent: 2em; text-align: justify">
+      É um movimento bidimensional caracterizado por uma posição de lançamento $(x_0, y_0)$, um ângulo de lançamento $\theta$ com a horizontal e uma velocidade de lançamento de módulo $v_0$. O movimento na direção horizontal $x$ pode ser descrito como um movimento retilíneo uniforme (MRU) e o movimento na direção vertical $(y)$ pode ser descrito como um movimento e uniformemente variado (MRUV) com aceleração $g$
+    </p>
+
+    <table style="width: 100%">
+      <tr>
+        <th> Posição:</th>
+        <th>Velocidade:</th>
+      </tr>
+
+      <tr>
+        <td>
+          \begin{align}
+            \vec{r}(t) &= x(t) \hat{\imath} + y(t) \hat{\jmath} \\
+            x(t) &= x_0 + v_{0x} t \\
+            y(t) &= y_0 + v_{0y} t + \textstyle \frac{1}{2} g t^2 \\
+          \end{align}
+        </td>
+        <td>
+          \begin{align}
+            \vec{v}(t) &= v_x(t) \hat{\imath} + v_y(t) \hat{\jmath} \\
+            v_x(t) &= v_{0x} \\
+            v_y(t) &= v_{0y} - gt 
+          \end{align}
+        </td>
+      </tr> 
+    </table>
+
+    <script>
+
+      let x0 = 0;
+      let y0 = 0;
+      let v0 = 10; // m/s 
+      let theta = 45 * Math.PI / 180; // rad
+      let v0x = v0 * Math.cos(theta);
+      let v0y = v0 * Math.sin(theta);
+      let g = 9.8; // m/s² 
+
+      let xs = [], ys = [], ts = [];
+
+      let t = 0, dt=0.01;
+
+      let x = x0, y=y0;
+
+      do {
+        xs.push(x);
+        ys.push(y);
+
+        t = t + dt;
+
+        x = x0 + v0x * t;
+        y = y0 + v0y * t - g *  t**2 / 2;
+
+        console.log(t, x, y);
+  
+      } while (y >= 0)
+
+      console.log(ts, xs, ys)
+
+      
+
+    </script>
+    
+  </body>
+</html>
+
